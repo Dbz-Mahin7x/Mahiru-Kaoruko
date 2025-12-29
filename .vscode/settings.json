@@ -11,7 +11,7 @@
   "prettier.semi": true,
   "prettier.endOfLine": "lf",
 
-  // Logic & Spacing (Cleaned duplicates)
+  
   "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": true,
   "javascript.format.insertSpaceBeforeFunctionKeyword": true,
   "javascript.format.insertSpaceBetweenFunctionKeywordAndParenthesis": true,
