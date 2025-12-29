@@ -1,0 +1,129 @@
+{
+        "facebookAccount": {
+                "email": "Mahinstarou@gmail.com",
+                "password": "",
+                "2FASecret": "",
+                "i_user": "",
+                "proxy": null,
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "intervalGetNewCookie": 1440,
+                "notes": "time the system automatically retrieves new cookies from email/password"
+        },
+        "antiInbox": false,
+        "language": "en",
+        "notesLanguage": "vi (Vietnamese), en (English)",
+        "nickNameBot": "🎀Bot Name🎀",
+        "prefix": "!",
+        "adminOnly": {
+                "enable": false,
+                "ignoreCommand": []
+        },
+        "adminBot": ["61580713195028"],
+        "whiteListMode": {
+                "enable": false,
+                "whiteListIds": [],
+                "notes": "only IDs in whiteListIds can use the bot"
+        },
+        "whiteListModeThread": {
+                "enable": false,
+                "whiteListThreadIds": ["61580713195028"],
+                "notes": "only threads in whiteListThreadIds can use the bot"
+        },
+        "database": {
+                "type": "sqlite",
+                "uriMongodb": "",
+                "autoSyncWhenStart": false,
+                "autoRefreshThreadInfoFirstTime": true,
+                "notes": "mongodb or sqlite is recommended"
+        },
+        "timeZone": "Asia/Dhaka",
+        "credentials": {
+                "gmailAccount": {
+                        "email": "ilomikparaphael@gmail.com",
+                        "clientId": "707976531024-j0h1m1r5lld2ck2eb0iss8pet8fkiu2g.apps.googleusercontent.com",
+                        "clientSecret": "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",
+                        "refreshToken": "1//0435VRKIR84KGCgYIARAAGAQSNwF-L9Irq-ndiTGzeY_17lETxH8ccgdXPLS8t9G3WDzioOirdR6kJXEdszdv3O1KFVoHv1r-l_U",
+                        "apiKey": ""
+                },
+                "gRecaptcha": {
+                        "siteKey": "",
+                        "secretKey": ""
+                }
+        },
+        "dashBoard": {
+                "enable": true,
+                "expireVerifyCode": 300000,
+                "port": 3001
+        },
+        "serverUptime": {
+                "enable": true,
+                "port": 3000,
+                "socket": {
+                        "enable": true,
+                        "channelName": "uptime",
+                        "verifyToken": "mahiru_2026"
+                }
+        },
+        "autoRestart": {
+                "time": 3600000,
+                "notes": "Time in milliseconds (1 hour) or cron time"
+        },
+        "autoUptime": {
+                "enable": false,
+                "timeInterval": 180,
+                "url": "",
+                "notes": "Automatically detects glitch or replit"
+        },
+        "autoLoadScripts": {
+                "enable": true,
+                "ignoreCmds": "",
+                "ignoreEvents": "",
+                "notes": "Automatically reload scripts on change"
+        },
+        "autoRefreshFbstate": true,
+        "autoReloginWhenChangeAccount": false,
+        "autoRestartWhenListenMqttError": true,
+        "restartListenMqtt": {
+                "enable": true,
+                "timeRestart": 3600000,
+                "delayAfterStopListening": 2000,
+                "logNoti": true
+        },
+        "notiWhenListenMqttError": {
+                "gmail": { "enable": false, "emailGetNoti": "" },
+                "telegram": { "enable": false, "botToken": "", "chatId": "" },
+                "discordHook": { "enable": false, "webhookUrl": "" }
+        },
+        "hideNotiMessage": {
+                "commandNotFound": false,
+                "adminOnly": false,
+                "threadBanned": false,
+                "userBanned": false,
+                "needRoleToUseCmd": false,
+                "needRoleToUseCmdOnReply": false,
+                "needRoleToUseCmdOnReaction": false
+        },
+        "logEvents": {
+                "disableAll": false,
+                "message": true,
+                "message_reaction": true,
+                "message_unsend": true,
+                "message_reply": true,
+                "event": true,
+                "read_receipt": false,
+                "typ": false,
+                "presence": false
+        },
+        "optionsFca": {
+                "forceLogin": true,
+                "listenEvents": true,
+                "updatePresence": true,
+                "listenTyping": true,
+                "logLevel": "error",
+                "selfListen": false,
+                "selfListenEvent": true,
+                "autoMarkDelivery": false,
+                "autoReconnect": true,
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        }
+}
