@@ -14,10 +14,6 @@
       "rewardDay1": {
         "coin": 100,
         "exp": 10
-      },
-      "rewardFirstDay": {
-        "coin": 100,
-        "exp": 10
       }
     },
     "notification": {
@@ -31,14 +27,6 @@
     },
     "appstore": {
       "limitResult": 3
-    },
-    "dhbc": {
-      "reward": 1000
-    }
-  },
-  "envEvents": {
-    "logsbot": {
-      "allow": true
     }
   }
 }
