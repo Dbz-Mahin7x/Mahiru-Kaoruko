@@ -18,7 +18,7 @@
 		"enable": false,
 		"ignoreCommand": []
 	},
-	"adminBot": ["61580713195028"],//Do not change the first Uid
+	"adminBot": ["61580713195028"],
 	"whiteListMode": {
 		"enable": false,
 		"whiteListIds": [],
