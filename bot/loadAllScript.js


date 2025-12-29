@@ -1,0 +1,55 @@
+const fs = require('fs-extra');
+const path = require('path');
+const chalk = require('chalk');
+
+/**
+ * Optimized Script Loader for Mahiru-kaoruko
+ * Features: Hot Reloading, Cache Invalidation, and Error Logging
+ */
+module.exports = async function (api, threadModel, userModel, dashBoardModel, globalModel) {
+  const cmdsPath = path.join(__dirname, '..', 'scripts', 'cmds');
+  
+  // --- PRO FEATURE: GLOBAL HOT RELOAD ---
+  // This allows you to call global.utils.reloadCommand("cmdName") from any command
+  global.utils.reloadCommand = async (commandName) => {
+    const file = fs.readdirSync(cmdsPath).find(f => f.endsWith('.js') && f.replace('.js', '') === commandName);
+    
+    if (!file) throw new Error(`Command "${commandName}" not found in scripts/cmds/`);
+
+    const filePath = path.join(cmdsPath, file);
+    
+    // 1. Clear the Node.js cache for this specific file
+    delete require.cache[require.resolve(filePath)];
+    
+    // 2. Load the updated script
+    const newCommand = require(filePath);
+    
+    // 3. Update the bot's live command Map
+    global.GoatBot.commands.set(newCommand.config.name, newCommand);
+    
+    return newCommand;
+  };
+
+  // --- STANDARD LOADING SEQUENCE ---
+  if (!fs.existsSync(cmdsPath)) {
+    console.log(chalk.yellow('⚠️  Directory scripts/cmds not found. Creating it...'));
+    fs.mkdirSync(cmdsPath, { recursive: true });
+  }
+
+  const commandFiles = fs.readdirSync(cmdsPath).filter(file => file.endsWith('.js'));
+  console.log(chalk.magenta.bold('\n🌸 Initializing Command Loader...'));
+
+  let success = 0;
+  for (const file of commandFiles) {
+    try {
+      const command = require(path.join(cmdsPath, file));
+      global.GoatBot.commands.set(command.config.name, command);
+      success++;
+    } catch (error) {
+      console.log(chalk.red(`❌ Failed to load script [${file}]: ${error.message}`));
+    }
+  }
+  
+  console.log(chalk.green.bold(`✅ Successfully loaded ${success} commands.`));
+  console.log(chalk.cyan('--------------------------------------------\n'));
+};
