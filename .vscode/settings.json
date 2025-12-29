@@ -21,12 +21,12 @@
   "javascript.format.insertSpaceAroundOperators": true,
   "javascript.format.placeCursorAfterClosingCurlyBrace": true,
 
-  // Fix for the red lines: Standardizes the formatter
+  
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-  // Environment Association
+ 
   "files.associations": {
     "*.json": "jsonc",
     "account.dev.txt": "json"
