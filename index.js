@@ -1,38 +1,62 @@
-/**
- * @author NTKhang
- * ! The source code is written by NTKhang, please don't change the author's name everywhere. Thank you for using
- * ! Official source code: https://github.com/ntkhang03/Goat-Bot-V2
- * ! If you do not download the source code from the above address, you are using an unknown version and at risk of having your account hacked
- *
- * English:
- * ! Please do not change the below code, it is very important for the project.
- * It is my motivation to maintain and develop the project for free.
- * ! If you change it, you will be banned forever
- * Thank you for using
- *
- * Vietnamese:
- * ! Vui lòng không thay đổi mã bên dưới, nó rất quan trọng đối với dự án.
- * Nó là động lực để tôi duy trì và phát triển dự án miễn phí.
- * ! Nếu thay đổi nó, bạn sẽ bị cấm vĩnh viễn
- * Cảm ơn bạn đã sử dụng
- */
-
+const express = require('express');
+const path = require('path');
 const { spawn } = require("child_process");
-const log = require("./logger/log.js");
+const fs = require("fs-extra");
+const http = require("http");
+const WebSocket = require("ws");
+
+const app = express();
+const server = http.createServer(app);
+const port = process.env.PORT || 3000;
+
+// Storage for logs
+if (!fs.existsSync("./cache")) fs.mkdirSync("./cache");
+const logPath = path.join(__dirname, "cache", "logs.txt");
+fs.writeFileSync(logPath, "", { flag: "a" });
+
+let clients = [];
+
+// High-quality Console Interceptor
+const originalLog = console.log;
+console.log = (...args) => {
+  const logMsg = args.map(arg => (typeof arg === "object" ? JSON.stringify(arg, null, 2) : String(arg))).join(" ");
+  originalLog(logMsg);
+  clients.forEach(ws => ws.readyState === 1 && ws.send(logMsg));
+};
+
+// WebSocket for real-time dashboard
+const wss = new WebSocket.Server({ server });
+wss.on("connection", ws => {
+  clients.push(ws);
+  ws.send("[Connected] ✅ **Mahiru-kaoruko** log viewer active");
+  ws.on("close", () => { clients = clients.filter(c => c !== ws); });
+});
+
+app.get('/', (req, res) => res.send('**Mahiru-kaoruko** System is Online. Use /logs to view data.'));
+
+// Enhanced /logs UI
+app.get("/logs", (req, res) => {
+  res.send(`<html><head><title>Mahiru-kaoruko Logs</title><style>body{background:#000;color:#ff69b4;font-family:monospace;padding:20px;}#log{height:80vh;overflow-y:auto;border:1px solid #ff69b4;padding:10px;}</style></head>
+  <body><h2>🌸 Mahiru-kaoruko Realtime Logs</h2><div id="log">Loading system output...</div>
+  <script>const log=document.getElementById("log");const ws=new WebSocket("wss://"+location.host);ws.onmessage=e=>{log.innerHTML+="<div>"+e.data+"</div>";log.scrollTop=log.scrollHeight;};</script></body></html>`);
+});
+
+server.listen(port, () => {
+  console.log(`🎀 Mahiru-kaoruko Server running at port ${port}`);
+});
 
 function startProject() {
-	const child = spawn("node", ["Goat.js"], {
-		cwd: __dirname,
-		stdio: "inherit",
-		shell: true
-	});
+  // Launches Goat.js (The Main Bot Logic)
+  const child = spawn("node", ["Goat.js"], {
+    cwd: __dirname,
+    stdio: "inherit",
+    shell: true
+  });
 
-	child.on("close", (code) => {
-		if (code == 2) {
-			log.info("Restarting Project...");
-			startProject();
-		}
-	});
+  child.on("close", (code) => {
+    console.log(`[𝐌𝐚𝐡𝐢𝐫𝐮-𝐊𝐚𝐨𝐫𝐮𝐤𝐮] Exited with code ${code}. Restarting...`);
+    setTimeout(startProject, 3000);
+  });
 }
 
 startProject();
