@@ -3,8 +3,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
-  
-  // Prettier Rules
+
   "prettier.singleQuote": true,
   "prettier.trailingComma": "es5",
   "prettier.printWidth": 100,
@@ -12,25 +11,24 @@
   "prettier.semi": true,
   "prettier.endOfLine": "lf",
 
-  // Logic & Scannability
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active",
-  "editor.parameterHints.enabled": true,
-
-  // JavaScript Specific Formatting
+  // Logic & Spacing (Cleaned duplicates)
   "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": true,
   "javascript.format.insertSpaceBeforeFunctionKeyword": true,
+  "javascript.format.insertSpaceBetweenFunctionKeywordAndParenthesis": true,
+  "javascript.format.insertSpaceAfterFunctionName": false,
   "javascript.format.insertSpaceAfterComma": true,
   "javascript.format.insertSpaceAfterSemicolon": true,
   "javascript.format.insertSpaceAroundOperators": true,
+  "javascript.format.placeCursorAfterClosingCurlyBrace": true,
 
+  // Fix for the red lines: Standardizes the formatter
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.suggest.snippetsPreventQuickSuggestions": false
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
+  // Environment Association
   "files.associations": {
-    "account.dev.txt": "json",
-    "config.dev.json": "jsonc"
+    "*.json": "jsonc",
+    "account.dev.txt": "json"
   }
 }
